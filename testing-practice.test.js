@@ -1,4 +1,4 @@
-import { capitalize, reverseString, calculator, caesarCipher } from './testing-practice.js';
+import { capitalize, reverseString, calculator, caesarCipher, analyzeArray } from './testing-practice.js';
 
 test('capitalize the first letter', () => {
     expect(capitalize('test')).toBe('Test');
@@ -67,5 +67,39 @@ describe('Caesar cipher', () => {
 
     test('shiftFactor over 26', () => {
         expect(caesarCipher('Hello, World!', 99)).toBe('The shift factor needs to be from -26 to 26.');
+    });
+});
+
+describe('analyze an array', () => {
+    test('analyzeArray([1, 8, 3, 4, 2, 6])', () => {
+        expect(analyzeArray([1, 8, 3, 4, 2, 6])).toEqual({average: 4, min: 1, max: 8, length: 6});
+    });
+
+    test('analyzeArray([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])', () => {
+        expect(analyzeArray([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])).toEqual({average: 486.85714285714283, min: 1, max: 6345, length: 14});
+    });
+
+    test('object', () => {
+        expect(analyzeArray({one:1, eight:8 , three:3, four:4, two:2, six:6})).toEqual({average: 4, min: 1, max: 8, length: 6});
+    });
+    
+    test('empty array', () => {
+        expect(analyzeArray([])).toBe('The array is empty.');
+    });
+
+    test('not an array of numbers', () => {
+        expect(analyzeArray(['dog', 2, 3])).toBe('The array must contain only numbers.');
+    });
+
+    test('text', () => {
+        expect(analyzeArray('test')).toBe('Only an array is accepted.');
+    });
+
+    test('number', () => {
+        expect(analyzeArray(2)).toBe('Only an array is accepted.');
+    });
+
+    test('boolean', () => {
+        expect(analyzeArray(true)).toBe('Only an array is accepted.');
     });
 });

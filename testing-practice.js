@@ -54,4 +54,25 @@ function caesarCipher(text, shift) { // shift is the amount in ASCII decimal val
     return encoded;
 }
 
-export { capitalize, reverseString, calculator, caesarCipher };
+function analyzeArray(arr) {
+    if (typeof arr != 'object') {
+        return 'Only an array is accepted.';
+    } else if (arr.length == 0) {
+        return 'The array is empty.';
+    } else if (!Array.isArray(arr)) {
+        arr = Object.values(arr);
+    } else if (arr.some(element => typeof element != 'number')) {
+        return 'The array must contain only numbers.';
+    }
+
+    const analyzed = {};
+
+    analyzed['average'] = arr.reduce((acc,cur) => acc + cur, 0) / arr.length;
+    analyzed['min'] = Math.min(...arr);
+    analyzed['max'] = Math.max(...arr);
+    analyzed['length'] = arr.length;
+
+    return analyzed;
+}
+
+export { capitalize, reverseString, calculator, caesarCipher, analyzeArray };
